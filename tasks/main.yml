@@ -1,18 +1,3 @@
-# dpkg reconfigure?
-- name: configure ldap auth server
-  debconf:      
-    name: ldap-auth-config
-    question: ldap-auth-config/ldapns/ldap-server
-    vtype: string
-    value: "{{ ldap_auth_uri }}"
-
-- name: configure ldap auth base dn
-  debconf:
-    name: ldap-auth-config
-    question: ldap-auth-config/ldapns/base-dn
-    vtype: string
-    value: "{{ ldap_base_dn }}"
-
 - name: ensure required base packages are present
   apt: 
     pkg: "{{ item }}" 
@@ -21,17 +6,21 @@
     cache_valid_time: 600
   with_items:
     - libnss-ldap
+    - libpam-ldap
 
+- name: update /etc/ldap.conf from template
+  template:
+    src: etc/ldap.conf
+    dest: /etc/ldap.conf
+    owner: root
+    group: root
+    mode: 0644
+ 
 - name: configure nss to use ldap
   command: auth-client-config -t nss -p lac_ldap
 
 - name: configure pam to use ldap
-  debconf: 
-    name: libpam-runtime  
-    question: libpam-runtime/profiles 
-    vtype: multiselect     
-    value: unix, ldap
+  when: ldap_enable_login
 
-- name: force pam to reconfigure /etc/pam.d
-  shell: rm -f /etc/pam.d/common-* && DEBIAN_FRONTEND=noninteractive pam-auth-update --force
-
+- name: configure pam to use ldap
+  when: ldap_enable_mkhomedir
