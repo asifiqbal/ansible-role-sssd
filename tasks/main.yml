@@ -4,7 +4,7 @@
     name: ldap-auth-config
     question: ldap-auth-config/ldapns/ldap-server
     vtype: string
-    value: ldap://{{ server_ip }}
+    value: "{{ ldap_auth_uri }}"
 
 - name: configure ldap auth base dn
   debconf:

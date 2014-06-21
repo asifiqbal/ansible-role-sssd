@@ -1,2 +1,4 @@
 ---
-# defaults file for ansible-role-pam-ldap
+ldap_auth_uri: ldapi:///
+ldap_auth_bind_dn: uid=auth,ou=services,{{ ldap_base_dn }}
+ldap_auth_bind_password: password
