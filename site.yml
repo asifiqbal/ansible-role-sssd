@@ -2,4 +2,4 @@
   sudo: True
   roles:
     - marklee77.slapd-auth
-    - marklee77.ldap-auth-client
+    - marklee77.sssd

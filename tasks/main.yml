@@ -5,22 +5,14 @@
     update_cache: yes 
     cache_valid_time: 600
   with_items:
-    - libnss-ldap
-    - libpam-ldap
+    - sssd
 
-- name: update /etc/ldap.conf from template
+- name: update /etc/sssd/sssd.conf from template
   template:
-    src: etc/ldap.conf
-    dest: /etc/ldap.conf
+    src: etc/sssd/sssd.conf
+    dest: /etc/sssd/sssd.conf
     owner: root
     group: root
-    mode: 0644
- 
-- name: configure nss to use ldap
-  command: auth-client-config -t nss -p lac_ldap
+    mode: 0600
 
-- name: configure pam to use ldap
-  when: ldap_enable_login
-
-- name: configure pam to use ldap
-  when: ldap_enable_mkhomedir
+# delete from pam if not enabled?
