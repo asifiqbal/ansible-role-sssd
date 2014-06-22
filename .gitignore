@@ -1,0 +1,4 @@
+.vagrant
+private/credentials
+roles/*
+!roles/marklee77.ldap-auth-client
