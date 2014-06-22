@@ -32,7 +32,16 @@
   notify:
     - restart sssd
 
-# delete from pam if not enabled?
+- name: ensure mkhomedir module is present in /etc/pam.d/common-session iff enabled
+  lineinfile:
+    dest: /etc/pam.d/{{ item }}
+    line: session required pam_mkhomedir.so umask=0022 skel=/etc/skel
+    regexp: ^session\s+required\s+pam_mkhomedir.so.*$
+    insertbefore: ^session\s+required\s+pam_unix.so.*$
+    state: "{{ 'present' if sssd_enable_mkhomedir else 'absent' }}"
+  with_items:
+    - common-session
+    - common-session-noninteractive 
 
 - name: ensure sssd services are started and enabled
   service:

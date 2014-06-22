@@ -4,5 +4,4 @@ ldap_uri: ldap://127.0.0.1/
 sssd_password: password
 sssd_password_hash: "{SSHA}eJNTYUqAuakTkuNFr04V1Y0Sh88PPBIn"
 
-sssd_enable_login: true
 sssd_enable_mkhomedir: true
