@@ -14,5 +14,30 @@
     owner: root
     group: root
     mode: 0600
+  notify:
+    - restart sssd
+
+- name: ensure that auth user exists in ldap
+  ldap:
+    bind_dn: cn=admin,{{ ldap_base_dn }}
+    bind_password: "{{ ldap_admin_password }}"
+    entry_dn: uid=auth,ou=services,{{ ldap_base_dn }}
+    attributes:
+      - objectClass: account
+      - objectClass: simpleSecurityObject
+      - uid: auth
+      - userPassword: "{{ sssd_password_hash }}"
+    modify_action: replace
+    state: present
+  notify:
+    - restart sssd
 
 # delete from pam if not enabled?
+
+- name: ensure sssd services are started and enabled
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  with_items:
+    - sssd

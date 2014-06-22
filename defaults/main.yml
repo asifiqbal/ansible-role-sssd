@@ -1,7 +1,8 @@
 ---
-ldap_auth_uri: ldapi:///
-ldap_auth_bind_dn: uid=auth,ou=services,{{ ldap_base_dn }}
-ldap_auth_bind_password: password
-ldap_enable_login: true
-ldap_enable_mkhomedir: true
-ldap_pam_password_prohibit_message: Please visit http://internal to change your password.
+ldap_uri: ldapi:///
+
+sssd_password: password
+sssd_password_hash: "{SSHA}eJNTYUqAuakTkuNFr04V1Y0Sh88PPBIn"
+
+sssd_enable_login: true
+sssd_enable_mkhomedir: true
