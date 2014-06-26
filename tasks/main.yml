@@ -1,4 +1,4 @@
-- name: ensure required base packages are present
+- name: ensure sssd packages are installed
   apt: 
     pkg: "{{ item }}" 
     state: latest 
@@ -6,6 +6,7 @@
     cache_valid_time: 600
   with_items:
     - sssd
+    - sssd-tools
 
 - name: update /etc/sssd/sssd.conf from template
   template:

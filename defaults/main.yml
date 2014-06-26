@@ -1,6 +1,7 @@
 ---
-ldap_uri: ldap://127.0.0.1/
+ldap_uri: ldap://localhost/
 
+sssd_tls_cipher_suite: SECURE256:!AES-128-CBC:!ARCFOUR-128:!CAMELLIA-128-CBC:!3DES-CBC:!CAMELLIA-128-CBC
 sssd_password: password
 sssd_password_hash: "{SSHA}eJNTYUqAuakTkuNFr04V1Y0Sh88PPBIn"
 
