@@ -5,4 +5,6 @@ sssd_password_hash: "{SSHA}eJNTYUqAuakTkuNFr04V1Y0Sh88PPBIn"
 
 sssd_verify_cert: true
 
+sssd_enable_modify_hosts: false
+
 sssd_enable_mkhomedir: true

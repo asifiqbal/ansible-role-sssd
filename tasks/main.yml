@@ -44,6 +44,15 @@
     - common-session
     - common-session-noninteractive 
 
+- name: ensure that hostname is set in /etc/hosts if desired...
+  lineinfile:
+    dest: /etc/hosts
+    backrefs: yes
+    regexp: ^127.0.0.1(.*)$
+    line: 127.0.0.1\1 {{ ansible_hostname }}
+    state: present
+  when: sssd_enable_modify_hosts
+
 - name: ensure sssd services are started and enabled
   service:
     name: "{{ item }}"
