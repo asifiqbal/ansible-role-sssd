@@ -47,9 +47,8 @@
 - name: ensure that hostname is set in /etc/hosts if desired...
   lineinfile:
     dest: /etc/hosts
-    backrefs: yes
-    regexp: ^127.0.0.1(.*)$
-    line: 127.0.0.1\1 {{ ansible_hostname }}
+    regexp: ^127.0.0.1(.*)(\s{{ ansible_hostname }}\s)?(.*)$
+    line: 127.0.0.1\1 {{ ansible_hostname }} \3
     state: present
   when: sssd_enable_modify_hosts
 
