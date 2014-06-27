@@ -18,15 +18,15 @@
   notify:
     - restart sssd
 
-- name: ensure that auth user exists in ldap
+- name: ensure that sss user exists in ldap
   ldap:
-    bind_dn: cn=admin,{{ ldap_base_dn }}
-    bind_password: "{{ ldap_admin_password }}"
-    entry_dn: uid=auth,ou=services,{{ ldap_base_dn }}
+    bind_dn: cn=admin,{{ ldap_auth_base_dn }}
+    bind_password: "{{ ldap_auth_admin_password }}"
+    entry_dn: uid=sss,ou=services,{{ ldap_auth_base_dn }}
     attributes:
       - objectClass: account
       - objectClass: simpleSecurityObject
-      - uid: auth
+      - uid: sss
       - userPassword: "{{ sssd_password_hash }}"
     modify_action: replace
     state: present
@@ -47,8 +47,8 @@
 - name: ensure that hostname is set in /etc/hosts if desired...
   lineinfile:
     dest: /etc/hosts
-    regexp: ^127.0.0.1(.*)(\s{{ ansible_hostname }}\s)?(.*)$
-    line: 127.0.0.1\1 {{ ansible_hostname }} \3
+    regexp: ^127.0.0.1\s+localhost
+    line: 127.0.0.1 localhost {{ ansible_hostname }}
     state: present
   when: sssd_enable_modify_hosts
 
