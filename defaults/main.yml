@@ -1,7 +1,7 @@
 ---
 sssd_run_dir: "{{ lookup('env', 'PWD') }}"
-sssd_password: "{{ lookup('password', sssd_run_dir + '/private/credentials/sssd-password') }}"
-sssd_password_salt: "{{ lookup('password', sssd_run_dir + '/private/credentials/sssd-password-salt length=4') }}"
+sssd_ldap_password: "{{ lookup('password', sssd_run_dir + '/private/credentials/sssd-ldap-password') }}"
+sssd_ldap_password_salt: "{{ lookup('password', sssd_run_dir + '/private/credentials/sssd-ldap-password-salt length=4') }}"
 
 sssd_tls_cipher_suite: SECURE256:!AES-128-CBC:!ARCFOUR-128:!CAMELLIA-128-CBC:!3DES-CBC:!CAMELLIA-128-CBC
 sssd_verify_cert: true

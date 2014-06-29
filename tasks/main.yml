@@ -27,7 +27,7 @@
       - objectClass: account
       - objectClass: simpleSecurityObject
       - uid: sss
-      - userPassword: "{{ sssd_password|ssha_password_hash(sssd_password_salt) }}"
+      - userPassword: "{{ sssd_ldap_password|ssha_password_hash(sssd_ldap_password_salt) }}"
     modify_action: replace
     state: present
   notify:
