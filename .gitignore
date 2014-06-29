@@ -1,4 +1,5 @@
-private
 .vagrant
+filter_plugins/*.pyc
+private
 roles/*
 !roles/marklee77.sssd
