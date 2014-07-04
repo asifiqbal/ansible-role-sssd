@@ -58,7 +58,7 @@
   lineinfile:
     dest: /etc/nsswitch.conf
     line: "sudoers:        files"
-    regexp: ^sudoers:
+    regexp: "^sudoers:"
     state: present
 
 - name: ensure sssd services are started and enabled
