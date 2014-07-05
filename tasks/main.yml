@@ -52,15 +52,6 @@
     state: present
   when: sssd_enable_modify_hosts
 
-# FIXME: will probably be able to renew this when sssd is updated in ubuntu
-# repos...
-- name: prevent sudo from sending email to admin users (disables sudoer ldap...)
-  lineinfile:
-    dest: /etc/nsswitch.conf
-    line: "sudoers:        files"
-    regexp: "^sudoers:"
-    state: present
-
 - name: ensure sssd services are started and enabled
   service:
     name: "{{ item }}"
