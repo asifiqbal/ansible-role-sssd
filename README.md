@@ -1,6 +1,9 @@
 marklee77.sssd
 ==============
 
+[![Build Status](https://travis-ci.org/marklee77/ansible-role-sssd.svg?branch=master)](https://travis-ci.org/marklee77/ansible-role-sssd)
+
+Ansible role to install sssd auth.
 
 Requirements
 ------------
@@ -10,15 +13,14 @@ LDAP server supporting ssl/tls.
 Role Variables
 --------------
 
-- ldap_uri: ldap://127.0.0.1/
+- sssd_tls_cipher_suite: SECURE256:!AES-128-CBC:!ARCFOUR-128:!CAMELLIA-128-CBC:!3DES-CBC:!CAMELLIA-128-CBC
+- sssd_verify_cert: true
 
-- sssd_password: password
-- sssd_password_hash: "{SSHA}eJNTYUqAuakTkuNFr04V1Y0Sh88PPBIn"
-
+- sssd_enable_modify_hosts: false
 - sssd_enable_mkhomedir: true
 
 Example Playbook
--------------------------
+----------------
 
     - hosts: all
       sudo: True
@@ -34,5 +36,5 @@ GPLv2
 Author Information
 ------------------
 
-http://stillwell.me/
+http://stillwell.me
 
