@@ -9,7 +9,7 @@ before_install:
 install:
 
     # Install Ansible.
-    - sudo apt-get -y install ansible
+    - sudo pip install --upgrade ansible
     - ansible-playbook --version
 
     # Get Roles
